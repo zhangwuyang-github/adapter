@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EntityResponse } from '../openApi/type';
+import { EntityResponse } from 'src/types/common';
 import { LingYuService } from '../lingYu';
 import moment from 'moment';
 

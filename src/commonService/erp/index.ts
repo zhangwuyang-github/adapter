@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios, { AxiosRequestConfig } from 'axios';
-import { EnvConfig } from '../openApi/type';
+import { EnvConfig } from 'src/types/common';
 
 @Injectable()
 export class ErpService {

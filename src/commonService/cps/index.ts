@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { fromPairs } from 'lodash';
-import { BaseResponse, EntityResponse, ListResponse } from '../openApi/type';
+import { BaseResponse, EntityResponse, ListResponse } from 'src/types/common';
 import { OpenApiService } from '../openApi';
 import {
   SearchEssentialBody,
   fetchCorePaasDetailParams,
   upsertParams,
-} from './type';
+} from './types/type';
 
 @Injectable()
 export class CpsService {

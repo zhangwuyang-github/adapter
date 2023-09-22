@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { OpenApiService } from '../openApi';
 import { fetchWorkOrderListParams } from './types/type';
-import { EntityResponse, ListResponse } from '../openApi/type';
+import { EntityResponse, ListResponse } from 'src/types/common';
 import { WorkOrderDetail } from './types/workOrder';
 
 @Injectable()
