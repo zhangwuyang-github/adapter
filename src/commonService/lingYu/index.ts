@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { OpenApiService } from '../openApi';
-import { fetchWorkOrderListParams } from './type';
+import { fetchWorkOrderListParams } from './types/type';
 import { EntityResponse, ListResponse } from '../openApi/type';
+import { WorkOrderDetail } from './types/workOrder';
 
 @Injectable()
 export class LingYuService {
@@ -25,7 +26,7 @@ export class LingYuService {
 
   async fetchWorkOrderDetail(
     params: number,
-  ): Promise<{ data: EntityResponse<any> }> {
+  ): Promise<{ data: EntityResponse<WorkOrderDetail> }> {
     try {
       return await this.openApiService.request({
         url: '/api/manufacture/workOrder/detail/async/main',
