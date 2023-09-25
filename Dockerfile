@@ -14,7 +14,6 @@ COPY nest-cli.json ./
 COPY src .
 
 RUN yarn install
-RUN npm ci --production
 
 EXPOSE 9000
 
