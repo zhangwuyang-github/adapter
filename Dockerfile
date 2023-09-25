@@ -7,14 +7,8 @@ RUN yarn config set registry https://registry.npm.taobao.org
 
 WORKDIR /src
 
-COPY package*.json ./
-COPY tsconfig*.json ./
-COPY nest-cli.json ./
-
-COPY src .
+COPY . .
 
 RUN yarn install
-
-EXPOSE 9000
 
 CMD ["yarn", "start"]
