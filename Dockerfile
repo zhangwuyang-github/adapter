@@ -15,10 +15,7 @@ COPY src .
 
 RUN yarn install
 RUN npm ci --production
-RUN yarn build
-
-COPY dist ./dist
 
 EXPOSE 9000
 
-CMD ["node", "./dist/main.js"]
+CMD ["npm", "start"]
