@@ -1,4 +1,4 @@
-FROM node:18.16.1
+FROM node:18-alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk add --no-cache tzdata
 ENV TZ=Asia/Shanghai
@@ -17,4 +17,4 @@ RUN yarn install
 
 EXPOSE 9000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
