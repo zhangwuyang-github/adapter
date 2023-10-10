@@ -5,7 +5,7 @@ const express = require("express");
 const app_module_1 = require("./app.module");
 const logger_middleware_1 = require("./middleware/logger/logger.middleware");
 const transform_interceptor_1 = require("./interceptor/transform/transform.interceptor");
-const any_exception_filter_1 = require("./filter/http-exception/any-exception.filter");
+const any_exception_filter_1 = require("./filter/any-exception/any-exception.filter");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(express.json());

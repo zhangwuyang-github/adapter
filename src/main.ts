@@ -3,7 +3,7 @@ import * as express from 'express';
 import { AppModule } from './app.module';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { TransformInterceptor } from './interceptor/transform/transform.interceptor';
-import { AllExceptionsFilter } from './filter/http-exception/any-exception.filter';
+import { AllExceptionsFilter } from './filter/any-exception/any-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
