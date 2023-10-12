@@ -22,15 +22,9 @@ const log4jsConfig: Configuration = {
       type: 'dateFile',
       filename: `${baseLogPath}/app.log`,
       alwaysIncludePattern: true,
-      layout: {
-        type: 'pattern',
-        pattern:
-          '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}',
-      },
       // 日志文件按日期（天）切割
       pattern: 'yyyyMMdd',
       daysToKeep: 60,
-      // maxLogSize: 10485760,
       numBackups: 3,
       keepFileExt: true,
     },
@@ -38,15 +32,9 @@ const log4jsConfig: Configuration = {
       type: 'dateFile',
       filename: `${baseLogPath}/error.log`,
       alwaysIncludePattern: true,
-      layout: {
-        type: 'pattern',
-        pattern:
-          '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}',
-      },
       // 日志文件按日期（天）切割
       pattern: 'yyyyMMdd',
       daysToKeep: 60,
-      // maxLogSize: 10485760,
       numBackups: 3,
       keepFileExt: true,
     },

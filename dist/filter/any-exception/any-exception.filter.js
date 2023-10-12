@@ -25,6 +25,7 @@ let AllExceptionsFilter = class AllExceptionsFilter {
             response: exception.toString(),
         };
         log4js_1.Logger.error(logFormat);
+        log4js_1.Logger.info(logFormat);
         response.status(status).json({
             code: status,
             message: '服务器开小差啦',

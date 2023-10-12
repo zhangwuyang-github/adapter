@@ -27,6 +27,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       response: exception.toString(),
     };
     Logger.error(logFormat);
+    Logger.info(logFormat);
     response.status(status).json({
       code: status,
       message: '服务器开小差啦',

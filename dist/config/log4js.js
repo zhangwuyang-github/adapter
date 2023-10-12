@@ -21,10 +21,6 @@ const log4jsConfig = {
             type: 'dateFile',
             filename: `${baseLogPath}/app.log`,
             alwaysIncludePattern: true,
-            layout: {
-                type: 'pattern',
-                pattern: '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}',
-            },
             pattern: 'yyyyMMdd',
             daysToKeep: 60,
             numBackups: 3,
@@ -34,10 +30,6 @@ const log4jsConfig = {
             type: 'dateFile',
             filename: `${baseLogPath}/error.log`,
             alwaysIncludePattern: true,
-            layout: {
-                type: 'pattern',
-                pattern: '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}',
-            },
             pattern: 'yyyyMMdd',
             daysToKeep: 60,
             numBackups: 3,
