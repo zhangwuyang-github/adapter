@@ -12,19 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const open_service_1 = require("../common/service/open.service");
 let AppService = class AppService {
-    constructor(configService) {
+    constructor(configService, openService) {
         this.configService = configService;
+        this.openService = openService;
     }
     getHello() {
         return 'Hello World!';
     }
-    getConfig() {
+    async getConfig() {
         const config = this.configService.get('http');
+        const token = await this.openService.getToken();
         return {
             code: 200,
             data: {
                 entity: config,
+                token: token,
             },
         };
     }
@@ -32,6 +36,7 @@ let AppService = class AppService {
 exports.AppService = AppService;
 exports.AppService = AppService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [config_1.ConfigService])
+    __metadata("design:paramtypes", [config_1.ConfigService,
+        open_service_1.OpenApiService])
 ], AppService);
 //# sourceMappingURL=app.service.js.map

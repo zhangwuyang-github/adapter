@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const cache_manager_1 = require("@nestjs/cache-manager");
 const app_controller_1 = require("./controller/app.controller");
 const app_service_1 = require("./service/app.service");
 const cps_service_1 = require("./common/service/cps.service");
@@ -23,6 +24,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            cache_manager_1.CacheModule.register(),
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 load: [configuration_1.default],

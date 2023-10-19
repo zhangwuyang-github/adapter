@@ -34,8 +34,8 @@ let AppController = AppController_1 = class AppController {
             },
         };
     }
-    async getEnvConfig() {
-        const resp = await this.appService.getConfig();
+    getEnvConfig() {
+        const resp = this.appService.getConfig();
         return resp;
     }
 };
@@ -57,7 +57,7 @@ __decorate([
     (0, common_1.Get)('/api/getEnvConfig'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], AppController.prototype, "getEnvConfig", null);
 exports.AppController = AppController = AppController_1 = __decorate([
     (0, common_1.Controller)(),

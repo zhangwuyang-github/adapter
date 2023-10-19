@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CacheModule } from '@nestjs/cache-manager';
 import { AppController } from './controller/app.controller';
 import { AppService } from './service/app.service';
 import { CpsService } from './common/service/cps.service';
@@ -11,6 +12,7 @@ import configuration from './configuration';
 
 @Module({
   imports: [
+    CacheModule.register(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],

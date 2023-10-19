@@ -19,6 +19,7 @@ export declare class AppController {
         code: number;
         data: {
             entity: any;
+            token: string;
         };
     }>;
 }

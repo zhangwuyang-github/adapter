@@ -1,12 +1,15 @@
 import { ConfigService } from '@nestjs/config';
+import { OpenApiService } from 'src/common/service/open.service';
 export declare class AppService {
     private readonly configService;
-    constructor(configService: ConfigService);
+    private readonly openService;
+    constructor(configService: ConfigService, openService: OpenApiService);
     getHello(): string;
-    getConfig(): {
+    getConfig(): Promise<{
         code: number;
         data: {
             entity: any;
+            token: string;
         };
-    };
+    }>;
 }
