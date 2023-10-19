@@ -1,0 +1,26 @@
+# MES环境配置
+http:
+  mes:
+    host: 'https://c2.xinheyun.com'
+    appKey: '31774d79-8c94-46dc-a0b8-7697c28ed812'
+    appSecret: '>OJ=Qb]8A7*SW#b8'
+
+  # 畅捷通环境配置
+  chanJet:
+    host: 'https://openapi.chanjet.com'
+    key: '19981020'
+    secret: '19981020'
+    refreshToken: '19981020'
+
+  # 金蝶K3Wise环境配置  
+  k3wise:
+    host: ''
+    authorityCode: '19981020'
+
+  # 金蝶k3Cloud环境配置
+  k3cloud:
+    host: ''
+    key: ''
+    secret: ''
+    lcid: 2052
+    acctid: '19981020'

@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AllExceptionsFilter = void 0;
 const common_1 = require("@nestjs/common");
-const log4js_1 = require("../../utils/log4js");
+const utils_1 = require("../../common/utils");
 let AllExceptionsFilter = class AllExceptionsFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
@@ -24,8 +24,8 @@ let AllExceptionsFilter = class AllExceptionsFilter {
             statusCode: status,
             response: exception.toString(),
         };
-        log4js_1.Logger.error(logFormat);
-        log4js_1.Logger.info(logFormat);
+        utils_1.logger.error(logFormat);
+        utils_1.logger.info(logFormat);
         response.status(status).json({
             code: status,
             message: '服务器开小差啦',

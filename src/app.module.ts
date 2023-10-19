@@ -1,18 +1,19 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './controller/app.controller';
 import { AppService } from './service/app.service';
-import { CpsService } from './commonService/cps';
-import { ErpService } from './commonService/erp';
-import { OpenApiService } from './commonService/openApi';
-import { LingYuService } from './commonService/lingYu';
-import { EasyEasyService } from './commonService/easyEasy';
+import { CpsService } from './common/service/cps.service';
+import { ErpService } from './common/service/erp.service';
+import { OpenApiService } from './common/service/open.service';
+import { MesService } from './common/service/mes.service';
+import { EasyEasyService } from './common/service/easy.service';
+import configuration from './configuration';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: 'src/config/.env',
+      load: [configuration],
     }),
   ],
   controllers: [AppController],
@@ -21,7 +22,9 @@ import { EasyEasyService } from './commonService/easyEasy';
     CpsService,
     ErpService,
     OpenApiService,
-    LingYuService,
-    EasyEasyService,],
+    MesService,
+    EasyEasyService,
+    ConfigService,
+  ],
 })
 export class AppModule {}

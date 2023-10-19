@@ -15,4 +15,10 @@ export declare class AppController {
             };
         };
     };
+    getEnvConfig(): Promise<{
+        code: number;
+        data: {
+            entity: any;
+        };
+    }>;
 }

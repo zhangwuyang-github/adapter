@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { Logger } from 'src/utils/log4js';
+import { logger } from 'src/common/utils';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
@@ -17,10 +17,7 @@ export class LoggerMiddleware implements NestMiddleware {
       body: JSON.stringify(req.body),
     };
     if (code !== 200) {
-      Logger.error(logFormat);
-    } else {
-      Logger.access(logFormat);
-      Logger.log(logFormat);
+      logger.error(logFormat);
     }
   }
 }

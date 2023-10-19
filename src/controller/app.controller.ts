@@ -23,4 +23,10 @@ export class AppController {
       },
     };
   }
+
+  @Get('/api/getEnvConfig')
+  getEnvConfig() {
+    const resp = this.appService.getConfig();
+    return resp;
+  }
 }

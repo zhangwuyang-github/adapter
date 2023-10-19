@@ -6,7 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { Logger } from 'src/utils/log4js';
+import { logger } from 'src/common/utils';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -26,8 +26,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
       statusCode: status,
       response: exception.toString(),
     };
-    Logger.error(logFormat);
-    Logger.info(logFormat);
+    logger.error(logFormat);
+    logger.info(logFormat);
     response.status(status).json({
       code: status,
       message: '服务器开小差啦',

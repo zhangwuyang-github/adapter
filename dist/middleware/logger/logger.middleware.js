@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoggerMiddleware = void 0;
 const common_1 = require("@nestjs/common");
-const log4js_1 = require("../../utils/log4js");
+const utils_1 = require("../../common/utils");
 let LoggerMiddleware = class LoggerMiddleware {
     use(req, res, next) {
         const code = res.statusCode;
@@ -23,11 +23,7 @@ let LoggerMiddleware = class LoggerMiddleware {
             body: JSON.stringify(req.body),
         };
         if (code !== 200) {
-            log4js_1.Logger.error(logFormat);
-        }
-        else {
-            log4js_1.Logger.access(logFormat);
-            log4js_1.Logger.log(logFormat);
+            utils_1.logger.error(logFormat);
         }
     }
 };

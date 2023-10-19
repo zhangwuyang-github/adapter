@@ -11,11 +11,12 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const app_controller_1 = require("./controller/app.controller");
 const app_service_1 = require("./service/app.service");
-const cps_1 = require("./commonService/cps");
-const erp_1 = require("./commonService/erp");
-const openApi_1 = require("./commonService/openApi");
-const lingYu_1 = require("./commonService/lingYu");
-const easyEasy_1 = require("./commonService/easyEasy");
+const cps_service_1 = require("./common/service/cps.service");
+const erp_service_1 = require("./common/service/erp.service");
+const open_service_1 = require("./common/service/open.service");
+const mes_service_1 = require("./common/service/mes.service");
+const easy_service_1 = require("./common/service/easy.service");
+const configuration_1 = require("./configuration");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -24,17 +25,18 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                envFilePath: 'src/config/.env',
+                load: [configuration_1.default],
             }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,
-            cps_1.CpsService,
-            erp_1.ErpService,
-            openApi_1.OpenApiService,
-            lingYu_1.LingYuService,
-            easyEasy_1.EasyEasyService,
+            cps_service_1.CpsService,
+            erp_service_1.ErpService,
+            open_service_1.OpenApiService,
+            mes_service_1.MesService,
+            easy_service_1.EasyEasyService,
+            config_1.ConfigService,
         ],
     })
 ], AppModule);
