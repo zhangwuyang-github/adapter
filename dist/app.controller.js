@@ -15,12 +15,10 @@ var AppController_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("../service/app.service");
-const code_search_service_1 = require("../common/plugin/code-search/code-search.service");
+const app_service_1 = require("./service/app.service");
 let AppController = AppController_1 = class AppController {
-    constructor(appService, codeSearchService) {
+    constructor(appService) {
         this.appService = appService;
-        this.codeSearchService = codeSearchService;
         this.logger = new common_1.Logger(AppController_1.name);
     }
     getHello() {
@@ -38,10 +36,6 @@ let AppController = AppController_1 = class AppController {
     }
     getEnvConfig() {
         const resp = this.appService.getConfig();
-        return resp;
-    }
-    async test(body) {
-        const resp = await this.codeSearchService.fetchIdByCode(body?.code, 'ITEM');
         return resp;
     }
 };
@@ -65,16 +59,8 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getEnvConfig", null);
-__decorate([
-    (0, common_1.Post)('/api/test'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], AppController.prototype, "test", null);
 exports.AppController = AppController = AppController_1 = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService,
-        code_search_service_1.CodeSearchService])
+    __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

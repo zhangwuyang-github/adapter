@@ -14,11 +14,11 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _EasyEasyService_instances, _EasyEasyService_getWorkOrderIdByCode, _EasyEasyService_fetchWorkOrderDetailByCode, _EasyEasyService_getItemIdByCode, _EasyEasyService_fetchItemDetailByCode;
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EasyEasyService = void 0;
 const common_1 = require("@nestjs/common");
 const moment = require("moment");
-const mes_service_1 = require("./mes.service");
 let EasyEasyService = class EasyEasyService {
     constructor(mesService) {
         _EasyEasyService_instances.add(this);
@@ -177,6 +177,6 @@ _EasyEasyService_fetchItemDetailByCode = async function _EasyEasyService_fetchIt
 };
 exports.EasyEasyService = EasyEasyService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [mes_service_1.MesService])
+    __metadata("design:paramtypes", [typeof (_a = typeof MesService !== "undefined" && MesService) === "function" ? _a : Object])
 ], EasyEasyService);
-//# sourceMappingURL=easy.service.js.map
+//# sourceMappingURL=item.plugin.js.map

@@ -54,7 +54,7 @@ export interface ItemUnit {
   baseToPurchaseQuantity: number;
 }
 
-export interface Item {
+interface Item {
   itemId: string;
   rootItemId: string;
   itemIdOriginal: string;

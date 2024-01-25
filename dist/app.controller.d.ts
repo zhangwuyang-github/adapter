@@ -1,9 +1,7 @@
-import { AppService } from '../service/app.service';
-import { CodeSearchService } from 'src/common/plugin/code-search/code-search.service';
+import { AppService } from './service/app.service';
 export declare class AppController {
     private readonly appService;
-    private readonly codeSearchService;
-    constructor(appService: AppService, codeSearchService: CodeSearchService);
+    constructor(appService: AppService);
     private readonly logger;
     getHello(): string;
     postHello(body: {
@@ -24,5 +22,4 @@ export declare class AppController {
             token: string;
         };
     }>;
-    test(body: any): Promise<any>;
 }

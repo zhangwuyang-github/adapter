@@ -16,33 +16,41 @@ let MesService = class MesService {
     constructor(openApiService) {
         this.openApiService = openApiService;
     }
-    async fetchWorkOrderList(params) {
-        try {
-            return await this.openApiService.request({
-                url: '/api/manufacture/workOrder/list',
-                method: 'post',
-                data: {
-                    body: params,
-                },
-            });
-        }
-        catch (error) {
-            return error;
-        }
+    fetchWorkOrderList(params) {
+        return this.openApiService.request({
+            url: '/api/manufacture/workOrder/list',
+            method: 'post',
+            data: {
+                body: params,
+            },
+        });
     }
-    async fetchWorkOrderDetail(params) {
-        try {
-            return await this.openApiService.request({
-                url: '/api/manufacture/workOrder/detail/async/main',
-                method: 'post',
-                data: {
-                    body: params,
-                },
-            });
-        }
-        catch (error) {
-            return error;
-        }
+    fetchWorkOrderDetail(params) {
+        return this.openApiService.request({
+            url: '/api/manufacture/workOrder/detail/async/main',
+            method: 'post',
+            data: {
+                body: params,
+            },
+        });
+    }
+    fetchItemList(body) {
+        return this.openApiService.request({
+            url: '/api/item/product/list',
+            method: 'post',
+            data: {
+                body,
+            },
+        });
+    }
+    fetchItemDetail(body) {
+        return this.openApiService.request({
+            url: '/api/item/product/root/detail',
+            method: 'post',
+            data: {
+                body,
+            },
+        });
     }
 };
 exports.MesService = MesService;

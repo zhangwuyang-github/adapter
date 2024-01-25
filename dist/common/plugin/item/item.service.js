@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EasyEasyService = void 0;
 const common_1 = require("@nestjs/common");
 const moment = require("moment");
-const mes_service_1 = require("./mes.service");
+const mes_service_1 = require("../../service/mes.service");
 let EasyEasyService = class EasyEasyService {
     constructor(mesService) {
         _EasyEasyService_instances.add(this);
@@ -179,4 +179,4 @@ exports.EasyEasyService = EasyEasyService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [mes_service_1.MesService])
 ], EasyEasyService);
-//# sourceMappingURL=easy.service.js.map
+//# sourceMappingURL=item.service.js.map

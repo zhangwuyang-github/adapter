@@ -1,9 +1,9 @@
 # MES环境配置
 http:
   mes:
-    host: 'https://qa.newcoretech.com'
-    appKey: '31774d79-8c94-46dc-a0b8-7697c28ed812'
-    appSecret: '>OJ=Qb]8A7*SW#b8'
+    host: 'https://c2.xinheyun.com'
+    appKey: '4a9456e8-2daa-4292-8376-8240386ac32b'
+    appSecret: 'K?0n10|43@d(Ssd>'
 
   # 畅捷通环境配置
   chanJet:

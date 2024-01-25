@@ -1,4 +1,4 @@
-import { MesService } from './mes.service';
+import { MesService } from 'src/common/service/mes.service';
 export declare class EasyEasyService {
     #private;
     private mesService;

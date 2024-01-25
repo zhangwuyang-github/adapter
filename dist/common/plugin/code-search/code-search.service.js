@@ -13,30 +13,30 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _EasyEasyService_instances, _EasyEasyService_getWorkOrderIdByCode, _EasyEasyService_fetchWorkOrderDetailByCode, _EasyEasyService_getItemIdByCode, _EasyEasyService_fetchItemDetailByCode;
+var _CodeSearchService_instances, _CodeSearchService_getWorkOrderIdByCode, _CodeSearchService_fetchWorkOrderDetailByCode, _CodeSearchService_getItemIdByCode, _CodeSearchService_fetchItemDetailByCode;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EasyEasyService = void 0;
+exports.CodeSearchService = void 0;
 const common_1 = require("@nestjs/common");
 const moment = require("moment");
-const mes_service_1 = require("./mes.service");
-let EasyEasyService = class EasyEasyService {
+const mes_service_1 = require("../../service/mes.service");
+let CodeSearchService = class CodeSearchService {
     constructor(mesService) {
-        _EasyEasyService_instances.add(this);
+        _CodeSearchService_instances.add(this);
         this.mesService = mesService;
         this.idFunctionMap = {
-            ITEM: __classPrivateFieldGet(this, _EasyEasyService_instances, "m", _EasyEasyService_getItemIdByCode).bind(this),
-            WORK_ORDER: __classPrivateFieldGet(this, _EasyEasyService_instances, "m", _EasyEasyService_getWorkOrderIdByCode).bind(this),
+            ITEM: __classPrivateFieldGet(this, _CodeSearchService_instances, "m", _CodeSearchService_getItemIdByCode).bind(this),
+            WORK_ORDER: __classPrivateFieldGet(this, _CodeSearchService_instances, "m", _CodeSearchService_getWorkOrderIdByCode).bind(this),
         };
     }
-    async fetchIdByCode(code, type) {
+    async fetchIdByCode(type, code, customFilter) {
         const func = this.idFunctionMap[type];
-        const resp = await func(code);
+        const resp = await func(code, customFilter);
         return resp;
     }
 };
-exports.EasyEasyService = EasyEasyService;
-_EasyEasyService_instances = new WeakSet();
-_EasyEasyService_getWorkOrderIdByCode = async function _EasyEasyService_getWorkOrderIdByCode(workOrderCode) {
+exports.CodeSearchService = CodeSearchService;
+_CodeSearchService_instances = new WeakSet();
+_CodeSearchService_getWorkOrderIdByCode = async function _CodeSearchService_getWorkOrderIdByCode(workOrderCode, customFilter = {}) {
     if (!workOrderCode) {
         return {
             code: 500,
@@ -66,6 +66,7 @@ _EasyEasyService_getWorkOrderIdByCode = async function _EasyEasyService_getWorkO
         status: [0, 1, 2, 4],
         timeType: 3,
         workOrderNumber: workOrderCode,
+        ...customFilter,
     });
     if (workOrderListResp?.data?.code !== 200) {
         return {
@@ -95,8 +96,8 @@ _EasyEasyService_getWorkOrderIdByCode = async function _EasyEasyService_getWorkO
         },
     };
 };
-_EasyEasyService_fetchWorkOrderDetailByCode = async function _EasyEasyService_fetchWorkOrderDetailByCode(workOrderCode) {
-    const workOrderIdResp = await __classPrivateFieldGet(this, _EasyEasyService_instances, "m", _EasyEasyService_getWorkOrderIdByCode).call(this, workOrderCode);
+_CodeSearchService_fetchWorkOrderDetailByCode = async function _CodeSearchService_fetchWorkOrderDetailByCode(workOrderCode) {
+    const workOrderIdResp = await __classPrivateFieldGet(this, _CodeSearchService_instances, "m", _CodeSearchService_getWorkOrderIdByCode).call(this, workOrderCode);
     if (workOrderIdResp?.code !== 200) {
         return {
             code: workOrderIdResp?.code,
@@ -110,7 +111,7 @@ _EasyEasyService_fetchWorkOrderDetailByCode = async function _EasyEasyService_fe
     const workOrderDetailResp = await this.mesService.fetchWorkOrderDetail(workOrderId);
     return workOrderDetailResp?.data;
 };
-_EasyEasyService_getItemIdByCode = async function _EasyEasyService_getItemIdByCode(itemCode) {
+_CodeSearchService_getItemIdByCode = async function _CodeSearchService_getItemIdByCode(itemCode, customFilter = {}) {
     if (!itemCode) {
         return {
             code: 500,
@@ -131,6 +132,7 @@ _EasyEasyService_getItemIdByCode = async function _EasyEasyService_getItemIdByCo
             start: 0,
             length: 500,
         },
+        ...customFilter,
     });
     if (listResp?.data?.code !== 200) {
         return {
@@ -160,8 +162,8 @@ _EasyEasyService_getItemIdByCode = async function _EasyEasyService_getItemIdByCo
         },
     };
 };
-_EasyEasyService_fetchItemDetailByCode = async function _EasyEasyService_fetchItemDetailByCode(itemCode) {
-    const itemIdResp = await __classPrivateFieldGet(this, _EasyEasyService_instances, "m", _EasyEasyService_getItemIdByCode).call(this, itemCode);
+_CodeSearchService_fetchItemDetailByCode = async function _CodeSearchService_fetchItemDetailByCode(itemCode) {
+    const itemIdResp = await __classPrivateFieldGet(this, _CodeSearchService_instances, "m", _CodeSearchService_getItemIdByCode).call(this, itemCode);
     if (itemIdResp?.code !== 200) {
         return {
             code: itemIdResp?.code,
@@ -175,8 +177,8 @@ _EasyEasyService_fetchItemDetailByCode = async function _EasyEasyService_fetchIt
     const detailResp = await this.mesService.fetchItemDetail(itemId);
     return detailResp?.data;
 };
-exports.EasyEasyService = EasyEasyService = __decorate([
+exports.CodeSearchService = CodeSearchService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [mes_service_1.MesService])
-], EasyEasyService);
-//# sourceMappingURL=easy.service.js.map
+], CodeSearchService);
+//# sourceMappingURL=code-search.service.js.map
