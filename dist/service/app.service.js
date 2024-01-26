@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
-const open_service_1 = require("../common/service/open.service");
+const open_api_service_1 = require("../plugin/open-api/open-api.service");
 let AppService = class AppService {
     constructor(configService, openService) {
         this.configService = configService;
@@ -20,6 +20,9 @@ let AppService = class AppService {
     }
     getHello() {
         return 'Hello World!';
+    }
+    postHello(body) {
+        return body || 'Hello World!';
     }
     async getConfig() {
         const config = this.configService.get('http');
@@ -37,6 +40,6 @@ exports.AppService = AppService;
 exports.AppService = AppService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [config_1.ConfigService,
-        open_service_1.OpenApiService])
+        open_api_service_1.OpenApiService])
 ], AppService);
 //# sourceMappingURL=app.service.js.map

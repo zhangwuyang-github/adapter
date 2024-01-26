@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { OpenApiService } from 'src/common/service/open.service';
+import { OpenApiService } from 'src/plugin/open-api/open-api.service';
 
 @Injectable()
 export class AppService {
@@ -11,6 +11,10 @@ export class AppService {
 
   getHello(): string {
     return 'Hello World!';
+  }
+
+  postHello(body) {
+    return body || 'Hello World!';
   }
 
   async getConfig() {

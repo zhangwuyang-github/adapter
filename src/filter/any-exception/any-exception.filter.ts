@@ -11,6 +11,8 @@ import { logger } from 'src/common/utils';
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
+    console.log(exception);
+
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
@@ -27,10 +29,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       response: exception.toString(),
     };
     logger.error(logFormat);
-    logger.info(logFormat);
     response.status(status).json({
       code: status,
-      message: '服务器开小差啦',
+      message: (exception as any)?.request?.message || '服务器开小差啦',
     });
   }
 }

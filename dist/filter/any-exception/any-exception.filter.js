@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const utils_1 = require("../../common/utils");
 let AllExceptionsFilter = class AllExceptionsFilter {
     catch(exception, host) {
+        console.log(exception);
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
@@ -25,10 +26,9 @@ let AllExceptionsFilter = class AllExceptionsFilter {
             response: exception.toString(),
         };
         utils_1.logger.error(logFormat);
-        utils_1.logger.info(logFormat);
         response.status(status).json({
             code: status,
-            message: '服务器开小差啦',
+            message: exception?.request?.message || '服务器开小差啦',
         });
     }
 };
