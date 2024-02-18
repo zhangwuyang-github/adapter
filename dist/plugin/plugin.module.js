@@ -16,6 +16,13 @@ const open_api_service_1 = require("./open-api/open-api.service");
 const erp_service_1 = require("./erp/erp.service");
 const corepass_service_1 = require("./corepass/corepass.service");
 const code_search_service_1 = require("./code-search/code-search.service");
+const providers = [
+    code_search_service_1.CodeSearchService,
+    mes_service_1.MesService,
+    open_api_service_1.OpenApiService,
+    erp_service_1.ErpService,
+    corepass_service_1.CorepassService,
+];
 let PluginModule = class PluginModule {
 };
 exports.PluginModule = PluginModule;
@@ -29,20 +36,8 @@ exports.PluginModule = PluginModule = __decorate([
                 load: [configuration_1.default],
             }),
         ],
-        providers: [
-            code_search_service_1.CodeSearchService,
-            mes_service_1.MesService,
-            open_api_service_1.OpenApiService,
-            erp_service_1.ErpService,
-            corepass_service_1.CorepassService,
-        ],
-        exports: [
-            code_search_service_1.CodeSearchService,
-            mes_service_1.MesService,
-            open_api_service_1.OpenApiService,
-            erp_service_1.ErpService,
-            corepass_service_1.CorepassService,
-        ],
+        providers: [...providers],
+        exports: [...providers],
     })
 ], PluginModule);
 //# sourceMappingURL=plugin.module.js.map

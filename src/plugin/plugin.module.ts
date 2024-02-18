@@ -8,6 +8,14 @@ import { ErpService } from './erp/erp.service';
 import { CorepassService } from './corepass/corepass.service';
 import { CodeSearchService } from './code-search/code-search.service';
 
+const providers = [
+  CodeSearchService,
+  MesService,
+  OpenApiService,
+  ErpService,
+  CorepassService,
+];
+
 @Global()
 @Module({
   imports: [
@@ -17,19 +25,7 @@ import { CodeSearchService } from './code-search/code-search.service';
       load: [configuration],
     }),
   ],
-  providers: [
-    CodeSearchService,
-    MesService,
-    OpenApiService,
-    ErpService,
-    CorepassService,
-  ],
-  exports: [
-    CodeSearchService,
-    MesService,
-    OpenApiService,
-    ErpService,
-    CorepassService,
-  ],
+  providers: [...providers],
+  exports: [...providers],
 })
 export class PluginModule {}
