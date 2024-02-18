@@ -11,6 +11,8 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./service/app.service");
 const plugin_module_1 = require("./plugin/plugin.module");
+const core_1 = require("@nestjs/core");
+const transform_interceptor_1 = require("./filter/any-exception/transform.interceptor");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -18,7 +20,10 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [plugin_module_1.PluginModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [
+            app_service_1.AppService,
+            { provide: core_1.APP_INTERCEPTOR, useClass: transform_interceptor_1.TransformInterceptor }
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
