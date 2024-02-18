@@ -31,7 +31,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     logger.error(logFormat);
     response.status(status).json({
       code: status,
-      message: (exception as any)?.request?.message || '服务器开小差啦',
+      message: (exception as any)?.response?.message || (exception as any)?.message || `${exception}`,
     });
   }
 }

@@ -28,7 +28,7 @@ let AllExceptionsFilter = class AllExceptionsFilter {
         utils_1.logger.error(logFormat);
         response.status(status).json({
             code: status,
-            message: exception?.request?.message || '服务器开小差啦',
+            message: exception?.response?.message || exception?.message || `${exception}`,
         });
     }
 };
