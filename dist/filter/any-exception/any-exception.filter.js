@@ -5,11 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var AllExceptionsFilter_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AllExceptionsFilter = void 0;
 const common_1 = require("@nestjs/common");
-const utils_1 = require("../../common/utils");
-let AllExceptionsFilter = class AllExceptionsFilter {
+let AllExceptionsFilter = AllExceptionsFilter_1 = class AllExceptionsFilter {
+    constructor() {
+        this.logger = new common_1.Logger(AllExceptionsFilter_1.name);
+    }
     catch(exception, host) {
         console.log(exception);
         const ctx = host.switchToHttp();
@@ -18,22 +21,22 @@ let AllExceptionsFilter = class AllExceptionsFilter {
         const status = exception instanceof common_1.HttpException
             ? exception.getStatus()
             : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
-        const logFormat = {
-            originUrl: request.url,
-            method: request.method,
-            IP: request.ip,
-            statusCode: status,
-            response: exception.toString(),
-        };
-        utils_1.logger.error(logFormat);
+        const message = exception?.response?.message || exception?.message || `${exception}`;
+        if (status === common_1.HttpStatus.INTERNAL_SERVER_ERROR) {
+            common_1.Logger.error(exception, undefined, 'Catch');
+        }
+        else {
+            this.logger.warn(`错误信息：(${status}) ${message} Path: ${request?.url}`);
+        }
         response.status(status).json({
             code: status,
-            message: exception?.response?.message || exception?.message || `${exception}`,
+            data: null,
+            message,
         });
     }
 };
 exports.AllExceptionsFilter = AllExceptionsFilter;
-exports.AllExceptionsFilter = AllExceptionsFilter = __decorate([
+exports.AllExceptionsFilter = AllExceptionsFilter = AllExceptionsFilter_1 = __decorate([
     (0, common_1.Catch)()
 ], AllExceptionsFilter);
 //# sourceMappingURL=any-exception.filter.js.map

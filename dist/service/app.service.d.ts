@@ -4,6 +4,7 @@ export declare class AppService {
     private readonly configService;
     private readonly openService;
     constructor(configService: ConfigService, openService: OpenApiService);
+    private logger;
     getHello(): string;
     postHello(body: any): any;
     getConfig(): Promise<{

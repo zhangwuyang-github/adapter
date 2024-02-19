@@ -8,15 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var AppService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const open_api_service_1 = require("../plugin/open-api/open-api.service");
-let AppService = class AppService {
+let AppService = AppService_1 = class AppService {
     constructor(configService, openService) {
         this.configService = configService;
         this.openService = openService;
+        this.logger = new common_1.Logger(AppService_1.name);
     }
     getHello() {
         return 'Hello World!';
@@ -27,6 +29,7 @@ let AppService = class AppService {
     async getConfig() {
         const config = this.configService.get('http');
         const token = await this.openService.getToken();
+        this.logger.log('token: ', token.d.d.d);
         return {
             code: 200,
             data: {
@@ -37,7 +40,7 @@ let AppService = class AppService {
     }
 };
 exports.AppService = AppService;
-exports.AppService = AppService = __decorate([
+exports.AppService = AppService = AppService_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [config_1.ConfigService,
         open_api_service_1.OpenApiService])
