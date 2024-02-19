@@ -22,6 +22,8 @@ export class AppService {
   async getConfig() {
     const config = this.configService.get('http');
     const token = await this.openService.getToken();
+    this.logger.log(`token: ${token}`);
+
     return {
       code: 200,
       data: {
