@@ -29,7 +29,6 @@ let AppService = AppService_1 = class AppService {
     async getConfig() {
         const config = this.configService.get('http');
         const token = await this.openService.getToken();
-        this.logger.log('token: ', token.d.d.d);
         return {
             code: 200,
             data: {

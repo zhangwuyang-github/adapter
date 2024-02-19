@@ -7,6 +7,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { BusinessException } from './biz.exception';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -18,8 +19,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const status =
-      exception instanceof HttpException
+    const status = exception instanceof BusinessException
+      ? (exception as any)?.response?.code
+      : exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
     const message = (exception as any)?.response?.message || (exception as any)?.message || `${exception}`;
@@ -29,6 +31,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     } else {
       this.logger.warn(`错误信息：(${status}) ${message} Path: ${request?.url}`);
     }
+
     response.status(status).json({
       code: status,
       data: null,

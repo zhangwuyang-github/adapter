@@ -9,6 +9,7 @@ var AllExceptionsFilter_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AllExceptionsFilter = void 0;
 const common_1 = require("@nestjs/common");
+const biz_exception_1 = require("./biz.exception");
 let AllExceptionsFilter = AllExceptionsFilter_1 = class AllExceptionsFilter {
     constructor() {
         this.logger = new common_1.Logger(AllExceptionsFilter_1.name);
@@ -18,9 +19,11 @@ let AllExceptionsFilter = AllExceptionsFilter_1 = class AllExceptionsFilter {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-        const status = exception instanceof common_1.HttpException
-            ? exception.getStatus()
-            : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
+        const status = exception instanceof biz_exception_1.BusinessException
+            ? exception?.response?.code
+            : exception instanceof common_1.HttpException
+                ? exception.getStatus()
+                : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
         const message = exception?.response?.message || exception?.message || `${exception}`;
         if (status === common_1.HttpStatus.INTERNAL_SERVER_ERROR) {
             common_1.Logger.error(exception, undefined, 'Catch');
