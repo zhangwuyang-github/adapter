@@ -14,19 +14,20 @@ const plugin_module_1 = require("./plugin/plugin.module");
 const core_1 = require("@nestjs/core");
 const transform_interceptor_1 = require("./filter/any-exception/transform.interceptor");
 const logger_module_1 = require("./middleware/logger/logger.module");
+const request_id_middleware_1 = require("./middleware/request-id/request-id.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(request_id_middleware_1.RequestIdMiddleware).forRoutes('*');
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            plugin_module_1.PluginModule,
-            logger_module_1.LoggerModule.forRoot(),
-        ],
+        imports: [plugin_module_1.PluginModule, logger_module_1.LoggerModule.forRoot()],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,
-            { provide: core_1.APP_INTERCEPTOR, useClass: transform_interceptor_1.TransformInterceptor }
+            { provide: core_1.APP_INTERCEPTOR, useClass: transform_interceptor_1.TransformInterceptor },
         ],
     })
 ], AppModule);

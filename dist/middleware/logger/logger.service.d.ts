@@ -12,6 +12,7 @@ export declare class LoggerService extends ConsoleLogger {
     constructor(context: string, options: ConsoleLoggerOptions);
     protected get level(): LogLevel;
     protected get maxFiles(): number;
+    protected get request_id(): string;
     protected initWinston(): void;
     verbose(message: any, context?: string): void;
     debug(message: any, context?: string): void;

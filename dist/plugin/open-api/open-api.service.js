@@ -18,6 +18,13 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const axios_1 = require("axios");
 const moment = require("moment");
+const async_local_storage_provider_1 = require("../../middleware/async-local-storage/async-local-storage.provider");
+axios_1.default.interceptors.request.use((config) => {
+    const store = async_local_storage_provider_1.asyncLocalStorage.getStore();
+    const request_id = store?.get('request_id');
+    config.headers['request_id'] = request_id;
+    return config;
+});
 let OpenApiService = class OpenApiService {
     constructor(configService, cacheManager) {
         this.configService = configService;

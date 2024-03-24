@@ -5,6 +5,14 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { Cache } from 'cache-manager';
 import * as moment from 'moment';
 import { EnvConfigDTO, MesConfig } from 'src/common/types/config';
+import { asyncLocalStorage } from 'src/middleware/async-local-storage/async-local-storage.provider';
+
+axios.interceptors.request.use((config) => {
+  const store = asyncLocalStorage.getStore();
+  const request_id = store?.get('request_id');
+  config.headers['request_id'] = request_id;
+  return config;
+});
 
 @Injectable()
 export class OpenApiService {

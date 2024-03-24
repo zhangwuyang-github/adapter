@@ -13,6 +13,7 @@ exports.LoggerService = exports.LogLevel = void 0;
 const common_1 = require("@nestjs/common");
 const winston_1 = require("winston");
 require("winston-daily-rotate-file");
+const async_local_storage_provider_1 = require("../async-local-storage/async-local-storage.provider");
 var LogLevel;
 (function (LogLevel) {
     LogLevel["ERROR"] = "error";
@@ -31,6 +32,11 @@ let LoggerService = class LoggerService extends common_1.ConsoleLogger {
     }
     get maxFiles() {
         return 31;
+    }
+    get request_id() {
+        const store = async_local_storage_provider_1.asyncLocalStorage.getStore();
+        const request_id = store?.get('request_id');
+        return request_id;
     }
     initWinston() {
         const baseLogPath = '../nest-log';
@@ -66,19 +72,22 @@ let LoggerService = class LoggerService extends common_1.ConsoleLogger {
         this.winstonLogger.log(LogLevel.DEBUG, message, { context });
     }
     log(message, context) {
-        super.log.apply(this, [message, context]);
-        this.winstonLogger.log(LogLevel.INFO, message, { context });
+        const newMessage = `request_id: ${this.request_id}, message: ${message}`;
+        super.log.apply(this, [newMessage, context]);
+        this.winstonLogger.log(LogLevel.INFO, newMessage, { context });
     }
     warn(message, context) {
-        super.warn.apply(this, [message, context]);
-        this.winstonLogger.log(LogLevel.WARN, message);
+        const newMessage = `request_id: ${this.request_id}, message: ${message}`;
+        super.warn.apply(this, [newMessage, context]);
+        this.winstonLogger.log(LogLevel.WARN, newMessage);
     }
     error(message, stack, context) {
-        super.error.apply(this, [message, stack, context]);
+        const newMessage = `request_id: ${this.request_id}, message: ${message}`;
+        super.error.apply(this, [newMessage, stack, context]);
         const hasStack = !!context;
         this.winstonLogger.log(LogLevel.ERROR, {
             context: hasStack ? context : stack,
-            message: hasStack ? new Error(message) : message,
+            message: hasStack ? new Error(newMessage) : newMessage,
         });
     }
 };
