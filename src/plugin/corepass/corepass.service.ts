@@ -11,6 +11,7 @@ import {
   upsertParams,
 } from 'src/common/types/cps';
 import { OpenApiService } from '../open-api/open-api.service';
+import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class CorepassService {
@@ -51,12 +52,12 @@ export class CorepassService {
   }
 
   /** 获取cps列表，若fuzzy为false，则可以实现精确匹配 */
-  fetchList(
+  fetchList<T = any>(
     templateApiName: string,
     pagination: { current: number; pageSize: number },
     filter?: any,
     fuzzy?: boolean,
-  ): Promise<{ data: ListResponse<any> }> {
+  ): Promise<AxiosResponse<ListResponse<T>>> {
     return this.openApiService.request({
       url: '/api/metadata-app/v2/data/query/search',
       method: 'post',
@@ -72,9 +73,9 @@ export class CorepassService {
     });
   }
 
-  fetchDetail(
+  fetchDetail<T = any>(
     params: fetchCorePaasDetailParams,
-  ): Promise<{ data: EntityResponse<any> }> {
+  ): Promise<AxiosResponse<EntityResponse<T>>> {
     return this.openApiService.request({
       url: '/api/metadata-app/v2/data/query/details',
       method: 'post',
@@ -85,9 +86,9 @@ export class CorepassService {
   }
 
   /** 获取单条cps数据详情 */
-  async singleDetail(
+  async singleDetail<T = any>(
     params: SearchEssentialBody,
-  ): Promise<EntityResponse<any>> {
+  ): Promise<EntityResponse<T>> {
     const resp = await this.fetchDetail(
       this.formatFetchCpsDetailParams(params),
     );

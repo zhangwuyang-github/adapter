@@ -32,7 +32,7 @@ interface UpsertContent {
    */
   value: { [key: string]: any };
   version?: number; // 数据版本，传的话就是更新
-  children: { [key: string]: UpsertContent[] };
+  children?: { [key: string]: UpsertContent[] };
 }
 
 /**
