@@ -43,7 +43,7 @@ export class CorepassService {
   callCpsWebhook(params: {
     uuid: string;
     data: any;
-  }): Promise<{ data: BaseResponse }> {
+  }): Promise<AxiosResponse<BaseResponse>> {
     return this.openApiService.request({
       url: `/api/metadata-flow/trigger/webhook/${params?.uuid}`,
       method: 'post',
