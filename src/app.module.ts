@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ProvidersModule } from './providers/providers.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { TransformInterceptor } from './filter/any-exception/transform.interceptor';
+import { TransformInterceptor } from './filter/transform.interceptor';
 import { LoggerModule } from './middleware/logger/logger.module';
 import { RequestIdMiddleware } from './middleware/request-id/request-id.middleware';
 

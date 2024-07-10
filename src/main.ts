@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import * as express from 'express';
 import { AppModule } from './app.module';
-import { AllExceptionsFilter } from './filter/any-exception/any-exception.filter';
+import { AllExceptionsFilter } from './filter/any-exception.filter';
 import { LoggerService } from './middleware/logger/logger.service';
 import { Logger } from '@nestjs/common';
 
