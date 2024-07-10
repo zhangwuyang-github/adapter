@@ -38,7 +38,7 @@ interface UpsertContent {
 /**
  * cps upsert接口参数
  */
-export interface upsertParams {
+export interface UpsertParams {
   templateApiName: string; // 单据apiName
   contents: UpsertContent[]; // 新建/修改的单据
 }

@@ -24,7 +24,7 @@ export interface K3CloudConfig {
   acctid: string;
 }
 
-export interface EnvConfigDTO {
+export interface Configuration {
   http: {
     mes: MesConfig;
     chanJet: ChanJetConfig;

@@ -4,7 +4,10 @@ import { ConfigService } from '@nestjs/config';
 import axios, { AxiosRequestConfig } from 'axios';
 import { Cache } from 'cache-manager';
 import * as moment from 'moment';
-import { EnvConfigDTO, MesConfig } from 'src/common/types/config';
+import {
+  Configuration,
+  MesConfig,
+} from 'src/configuration/configuration.interface';
 import { asyncLocalStorage } from 'src/middleware/async-local-storage/async-local-storage.provider';
 
 axios.interceptors.request.use((config) => {
@@ -17,7 +20,7 @@ axios.interceptors.request.use((config) => {
 @Injectable()
 export class OpenApiService {
   constructor(
-    private configService: ConfigService<EnvConfigDTO>,
+    private configService: ConfigService<Configuration>,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 

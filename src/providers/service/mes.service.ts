@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { EntityResponse, ListResponse } from 'src/common/types/response';
+import { EntityResponse, ListResponse } from 'src/interface/common.interface';
 import {
   fetchWorkOrderListParams,
   WorkOrderDetail,
-} from '../../dto/work-order.dto';
+} from '../../interface/work-order.interface';
 import { AxiosResponse } from 'axios';
-import { Item } from '../../dto/item.dto';
-import { OpenApiService } from '../open-api/open-api.service';
+import { Item } from '../../interface/item.interface';
+import { OpenApiService } from './open-api.service';
 
 @Injectable()
 export class MesService {

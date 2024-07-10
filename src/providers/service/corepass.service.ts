@@ -4,13 +4,13 @@ import {
   BaseResponse,
   EntityResponse,
   ListResponse,
-} from 'src/common/types/response';
+} from 'src/interface/common.interface';
 import {
   SearchEssentialBody,
   fetchCorePaasDetailParams,
-  upsertParams,
-} from 'src/common/types/cps';
-import { OpenApiService } from '../open-api/open-api.service';
+  UpsertParams,
+} from 'src/interface/corepass.interface';
+import { OpenApiService } from './open-api.service';
 import { AxiosResponse } from 'axios';
 
 @Injectable()
@@ -128,7 +128,7 @@ export class CorepassService {
    * 优点：是个同步接口，能实时反馈报错
    * 缺点：相对于配置一个新建的cps的webhook来新增，他的关联表单字段类型需要传各种各样的id
    */
-  async upsert(params: upsertParams) {
+  async upsert(params: UpsertParams) {
     return this.openApiService.request({
       url: '/api/metadata-app/v2/data/operation/saveOrUpdate',
       method: 'post',

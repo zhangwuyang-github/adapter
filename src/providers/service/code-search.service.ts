@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import * as moment from 'moment';
-import { Item } from 'src/dto/item.dto';
-import { WorkOrderDetail } from 'src/dto/work-order.dto';
-import { EntityResponse } from 'src/common/types/response';
-import { MesService } from '../mes/mes.service';
+import { Item } from 'src/interface/item.interface';
+import { WorkOrderDetail } from 'src/interface/work-order.interface';
+import { EntityResponse } from 'src/interface/common.interface';
+import { MesService } from './mes.service';
 
 interface ReturnDataTypeMap {
   物料: Item;

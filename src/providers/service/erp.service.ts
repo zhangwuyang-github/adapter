@@ -3,14 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import axios, { AxiosRequestConfig } from 'axios';
 import {
   ChanJetConfig,
-  EnvConfigDTO,
+  Configuration,
   K3CloudConfig,
   K3WiseConfig,
-} from 'src/common/types/config';
+} from 'src/configuration/configuration.interface';
 
 @Injectable()
 export class ErpService {
-  constructor(private configService: ConfigService<EnvConfigDTO>) {}
+  constructor(private configService: ConfigService<Configuration>) {}
 
   async getChanJetToken(): Promise<string> {
     const config = this.configService.get('http');
