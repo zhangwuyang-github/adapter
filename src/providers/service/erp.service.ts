@@ -4,7 +4,6 @@ import axios, { AxiosRequestConfig } from 'axios';
 import {
   ChanJetConfig,
   Configuration,
-  K3CloudConfig,
   K3WiseConfig,
 } from 'src/configuration/configuration.interface';
 
@@ -76,43 +75,6 @@ export class ErpService {
       url: `${host}${requestBody?.url}?token=${token}`,
       method: requestBody?.method,
       data: requestBody?.data,
-    });
-  }
-
-  async getK3CloudToken(): Promise<string> {
-    const config = this.configService.get('http');
-    const k3cloudConfig: K3CloudConfig = config.k3cloud;
-    const { host, acctid, key, secret, lcid } = k3cloudConfig;
-
-    const resp = await axios({
-      url: `${host}/Kingdee.BOS.WebApi.ServicesStub.AuthService.ValidateUser.common.kdsvc`,
-      method: 'post',
-      data: {
-        acctID: acctid,
-        username: key,
-        password: secret,
-        lcid: lcid,
-      },
-    });
-    const cookies = resp?.headers['set-cookie'];
-    const cookie = cookies?.find((c) => c.includes('kdservice-sessionid'));
-    return cookie;
-  }
-
-  /** 金蝶K3Cloud request */
-  async k3CloudRequest(requestBody: AxiosRequestConfig) {
-    const cookie = await this.getK3CloudToken();
-    const config = this.configService.get('http');
-    const k3cloudConfig: K3CloudConfig = config.k3cloud;
-    const { host } = k3cloudConfig;
-
-    return axios({
-      url: `${host}${requestBody?.url}`,
-      method: requestBody?.method,
-      data: requestBody?.data,
-      headers: {
-        Cookie: cookie,
-      },
     });
   }
 }

@@ -6,12 +6,14 @@ import { MesService } from './service/mes.service';
 import { OpenApiService } from './service/open-api.service';
 import { ErpService } from './service/erp.service';
 import { CorepassService } from './service/corepass.service';
+import { K3cloudService } from './service/k3cloud.service';
 
 const providers = [
   MesService,
   OpenApiService,
   ErpService,
   CorepassService,
+  K3cloudService,
 ];
 
 @Global()
