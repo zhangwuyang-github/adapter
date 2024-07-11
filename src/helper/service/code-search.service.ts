@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { Item } from 'src/interface/item.interface';
 import { WorkOrderDetail } from 'src/interface/work-order.interface';
 import { EntityResponse } from 'src/interface/common.interface';
-import { MesService } from './mes.service';
+import { MesService } from 'src/providers/service/mes.service';
 
 interface ReturnDataTypeMap {
   物料: Item;
@@ -18,25 +18,25 @@ export class CodeSearchService {
 
   private readonly functionMap = {
     物料: {
-      idFunc: this.#getItemIdByCode.bind(this),
-      detailFunc: this.#fetchItemDetailByCode.bind(this),
+      idFunc: this.getItemIdByCode.bind(this),
+      detailFunc: this.fetchItemDetailByCode.bind(this),
     },
     生产单: {
-      idFunc: this.#getWorkOrderIdByCode.bind(this),
-      detailFunc: this.#fetchWorkOrderDetailByCode.bind(this),
+      idFunc: this.getWorkOrderIdByCode.bind(this),
+      detailFunc: this.fetchWorkOrderDetailByCode.bind(this),
     },
     销售订单: {
-      idFunc: this.#getSaleOrderIdByCode.bind(this),
-      detailFunc: this.#fetchSaleOrderDetailByCode.bind(this),
+      idFunc: this.getSaleOrderIdByCode.bind(this),
+      detailFunc: this.fetchSaleOrderDetailByCode.bind(this),
     },
     发货单: {
-      idFunc: this.#getDeliveryOrderIdByCode.bind(this),
-      detailFunc: this.#fetchDeliveryOrderDetailByCode.bind(this),
+      idFunc: this.getDeliveryOrderIdByCode.bind(this),
+      detailFunc: this.fetchDeliveryOrderDetailByCode.bind(this),
     },
   } as const;
 
   /** 根据生产单编号查生产单id */
-  async #getWorkOrderIdByCode(
+  private async getWorkOrderIdByCode(
     workOrderCode: string,
     customFilter: Record<string, any> = {},
   ): Promise<EntityResponse<number>> {
@@ -50,12 +50,9 @@ export class CodeSearchService {
       };
     }
 
-    const now = moment();
-    const lastYear = now.add(-1, 'years');
-
     const workOrderListResp = await this.mesService.fetchWorkOrderList({
-      startTime: lastYear.valueOf(),
-      endTime: now.valueOf(),
+      startTime: moment().add(-1, 'years').valueOf(),
+      endTime: moment().valueOf(),
       creatorIds: [],
       assigneeParams: [],
       paginationParam: {
@@ -109,11 +106,11 @@ export class CodeSearchService {
   }
 
   /** 根据生产单编号查详情 */
-  async #fetchWorkOrderDetailByCode(
+  private async fetchWorkOrderDetailByCode(
     workOrderCode: string,
     customFilter?: Record<string, any>,
   ): Promise<EntityResponse<WorkOrderDetail>> {
-    const workOrderIdResp = await this.#getWorkOrderIdByCode(
+    const workOrderIdResp = await this.getWorkOrderIdByCode(
       workOrderCode,
       customFilter,
     );
@@ -135,7 +132,7 @@ export class CodeSearchService {
   }
 
   /** 根据物料编号查物料id */
-  async #getItemIdByCode(
+  private async getItemIdByCode(
     itemCode: string,
     customFilter: Record<string, any> = {},
   ): Promise<EntityResponse<string>> {
@@ -196,11 +193,11 @@ export class CodeSearchService {
   }
 
   /** 根据物料编号查详情 */
-  async #fetchItemDetailByCode(
+  private async fetchItemDetailByCode(
     itemCode: string,
     customFilter?: Record<string, any>,
   ): Promise<EntityResponse<Item>> {
-    const itemIdResp = await this.#getItemIdByCode(itemCode, customFilter);
+    const itemIdResp = await this.getItemIdByCode(itemCode, customFilter);
     if (itemIdResp?.code !== 200) {
       return {
         code: itemIdResp?.code,
@@ -217,7 +214,7 @@ export class CodeSearchService {
   }
 
   /** 根据销售订单编号查销售订单id */
-  async #getSaleOrderIdByCode(
+  private async getSaleOrderIdByCode(
     saleOrderCode: string,
     customFilter: Record<string, any> = {},
   ): Promise<EntityResponse<number>> {
@@ -285,11 +282,11 @@ export class CodeSearchService {
   }
 
   /** 根据物料编号查详情 */
-  async #fetchSaleOrderDetailByCode(
+  private async fetchSaleOrderDetailByCode(
     saleOrderCode: string,
     customFilter?: Record<string, any>,
   ): Promise<EntityResponse<SaleOrder>> {
-    const itemIdResp = await this.#getSaleOrderIdByCode(
+    const itemIdResp = await this.getSaleOrderIdByCode(
       saleOrderCode,
       customFilter,
     );
@@ -309,7 +306,7 @@ export class CodeSearchService {
   }
 
   /** 根据发货单编号查发货单id */
-  async #getDeliveryOrderIdByCode(
+  private async getDeliveryOrderIdByCode(
     code: string,
     customFilter: Record<string, any> = {},
   ): Promise<EntityResponse<number, { isMergeBatch?: 0 | 1 }>> {
@@ -369,11 +366,11 @@ export class CodeSearchService {
   }
 
   /** 根据发货单编号查详情 */
-  async #fetchDeliveryOrderDetailByCode(
+  private async fetchDeliveryOrderDetailByCode(
     code: string,
     customFilter?: Record<string, any>,
   ): Promise<EntityResponse<DeliveryOrder>> {
-    const idResp = await this.#getDeliveryOrderIdByCode(code, customFilter);
+    const idResp = await this.getDeliveryOrderIdByCode(code, customFilter);
     if (idResp?.code !== 200) {
       return {
         code: idResp?.code,

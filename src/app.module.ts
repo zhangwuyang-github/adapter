@@ -5,9 +5,10 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from './filter/transform.interceptor';
 import { LoggerModule } from './middleware/logger/logger.module';
 import { RequestIdMiddleware } from './middleware/request-id/request-id.middleware';
+import { HelperModule } from './helper/helper.module';
 
 @Module({
-  imports: [ProvidersModule, LoggerModule.forRoot()],
+  imports: [ProvidersModule, HelperModule, LoggerModule.forRoot()],
   controllers: [AppController],
   providers: [{ provide: APP_INTERCEPTOR, useClass: TransformInterceptor }],
 })
