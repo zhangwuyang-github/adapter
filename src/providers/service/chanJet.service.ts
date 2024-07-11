@@ -24,7 +24,7 @@ export class ChanJetService {
       url: `${host}/auth/v2/refreshToken?grantType=refresh_token&refreshToken=${refreshToken}`,
       method: 'get',
     });
-    return resp?.data?.result?.access_token || '';
+    return resp?.data?.result?.access_token;
   }
 
   /** 畅捷通request */
